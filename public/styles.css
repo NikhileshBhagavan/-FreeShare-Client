@@ -1,0 +1,299 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: cursive;
+    min-height: 100vh;
+}
+
+#root {
+    height: 100%;
+}
+
+.home {
+    margin-top: 60px;
+    background-image: url("./finalbgimage.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sharebook {
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+.row {
+    font-size: 1.5rem;
+}
+
+.inside {
+    height: 400px;
+    position: relative;
+}
+
+.contact {
+    position: relative;
+    height: 100%;
+    text-align: center;
+}
+
+.insidecontact {
+    margin-top: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.viewbook {
+    margin-top: 70px;
+}
+
+.description {
+    font-size: 1.3rem;
+}
+
+.contacticons {
+    position: relative;
+    bottom: 2px;
+    height: 100px;
+    width: 100px;
+}
+
+.ui.modal {
+    width: 230px;
+    border: 3px solid white;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: rgb(56, 55, 55);
+    color: #fff;
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+    width: 100%;
+}
+
+.nav-links a {
+    color: #fff;
+}
+
+.nav-links {
+    margin-bottom: 0px;
+}
+
+
+/* LOGO */
+
+.logo {
+    font-size: 30px;
+}
+
+.kill {
+    border: 5px dashed black;
+    padding: 30px;
+}
+
+
+/* NAVBAR MENU */
+
+.menu {
+    display: flex;
+    gap: 1em;
+    font-size: 18px;
+}
+
+.menu li:hover {
+    background-color: #4c9e9e;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.menu li {
+    padding: 5px 14px;
+}
+
+.sharebook {
+    position: relative;
+}
+
+form {
+    margin: 0;
+    position: absolute;
+    top: 14%;
+}
+
+
+/* DROPDOWN MENU */
+
+.services {
+    position: relative;
+}
+
+.menu .dropdown {
+    background-color: rgb(1, 139, 139);
+    padding: 1em 0;
+    position: absolute;
+    /*WITH RESPECT TO PARENT*/
+    display: none;
+    border-radius: 8px;
+    top: 35px;
+}
+
+.menu .dropdown li+li {
+    margin-top: 10px;
+}
+
+.menu .dropdown li {
+    padding: 0.5em 1em;
+    width: 8em;
+    text-align: center;
+}
+
+.menu .dropdown li:hover {
+    background-color: #4c9e9e;
+}
+
+.services:hover .dropdown {
+    display: block;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+.ui.segment.rate {
+    margin-top: 0px;
+}
+
+
+/*HAMBURGER MENU*/
+
+.hamburger {
+    display: none;
+    font-size: 24px;
+    user-select: none;
+}
+
+.field.imageupload {
+    margin-top: 35px;
+}
+
+.search.dropdown {
+    position: static;
+}
+
+.ui.labeled.icon.button {
+    position: static;
+}
+
+.ui.search.dropdown>.text {
+    position: static;
+}
+
+.ui.dropdown .menu {
+    position: relative;
+    top: 15px;
+}
+
+
+/* APPLYING MEDIA QUERIES */
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+        position: absolute;
+        background-color: rgb(56, 55, 55);
+        right: 0;
+        left: 0;
+        text-align: center;
+        padding: 16px 0;
+    }
+    .menu li:hover {
+        display: inline-block;
+        background-color: #4c9e9e;
+        transition: 0.3s ease;
+    }
+    .menu li+li {
+        margin-top: 12px;
+    }
+    input[type=checkbox]:checked~.menu {
+        display: block;
+    }
+    .hamburger {
+        display: block;
+    }
+    .dropdown {
+        left: 50%;
+        top: 30px;
+        transform: translateX(35%);
+    }
+    .dropdown li:hover {
+        background-color: #4c9e9e;
+    }
+}
+
+@media (max-width:992px) {
+    .sel {
+        position: static;
+        top: 0%;
+    }
+    .hide {
+        display: none;
+    }
+}
+
+@media only screen and (min-height:1200px) and (min-width:1000px) {
+    form {
+        top: 23%;
+    }
+}
+
+@media only screen and (min-width:1330px) {
+    .ui.segment.rate {
+        margin-top: 15px;
+    }
+    .field.imageupload {
+        margin-top: 10px;
+    }
+}
+
+@media (min-width:992px) {
+    .select {
+        position: fixed;
+        height: 100%;
+    }
+    /*position :fixed means the containing block will become viewport so thats why as height percentage is with respect to 
+    containing block[block in which it is contained] thats why as containing block becomes viewport 100% means complete viewport*/
+    .sel {
+        position: relative;
+        top: 1%;
+    }
+    .ui.blue.message {
+        height: 100%;
+    }
+}
+
+@media (min-height:1100px) {
+    .sel {
+        position: relative;
+        top: 23%;
+    }
+}
