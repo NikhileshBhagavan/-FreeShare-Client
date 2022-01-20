@@ -11,6 +11,10 @@ import Topic from "./topic_if_choose_others.jsx";
 import SubGenre from "./SubGenre.jsx";
 import SubTopic from "./subtopic_if_choose_others.jsx";
 import UserRating from "./UserRating.jsx";
+import Box from '@mui/material/Box';
+
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import Dropdown from "./DropDown.jsx";
 import Submit from "./Submit.jsx";
 import ImageUpload from "./ImageUpload.jsx";
@@ -18,8 +22,22 @@ import ImageUpload from "./ImageUpload.jsx";
 
 
 
-
 function ShareBookContainer() {
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: "60%",
+        minHeight:"100px",
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+        wordWrap:"break-word"
+      };
+    
+    
     let objkeys=Object.keys(obj);
     console.log(obj[objkeys[1]]);
    
@@ -39,6 +57,7 @@ function ShareBookContainer() {
         Is_success_or_error:null,
      
         success_or_error_message:"",
+        open:false,
        
 
     });
@@ -124,50 +143,48 @@ function ShareBookContainer() {
             let file=event.target.files[0];
             let ext=file.name.split(".").pop();
             if(ext=="jpg" || ext =="png" || ext=="jpeg" || ext=="svg"){
-                alert(`${file.name}  uploaded successfully ✔️✔️ `);
+             
                 setbookinfo((prevobj)=>{
                     return ({...prevobj, 
                         Is_image_uploaded:true,
                         Book_img_file:file,
                         Is_success_or_error:"success",
           
-                     success_or_error_message:`${file.name}  uploaded successfully `,});
+                     success_or_error_message:`${file.name}  uploaded successfully✔️✔️ `,
+                    open:true});
      
                 });
             }
             else{
-                alert(` ❌ Upload Failed ❌ , 🖼️ accepted formats: (jpg,png,jpeg,svg) Only`);
+               
                 setbookinfo((prevobj)=>{
                     return ({...prevobj, 
                         Is_success_or_error:"error",
           
-                     success_or_error_message:"Image accepted formats: (jpg,png,jpeg,svg) Only!!",});
+                     success_or_error_message:"Image accepted formats: (jpg,png,jpeg,svg) Only!!",
+                    open:true,});
      
                 });
             }
 
        }
-    function changerating(event,newValue){
-        setbookinfo((prevobj)=>{
-            return ({...prevobj, 
-                Rating :newValue,
-        });
-    });
-}
+   
+
 
 
 const onDrop = useCallback(acceptedFiles => {
     if(acceptedFiles.length===0){
-        alert(` ❌ Upload Failed ❌ , 📑 accepted formats: (pdf) Only`);
+    
         setbookinfo((prevobj)=>{
             return ({...prevobj, Is_success_or_error:"error",
   
-             success_or_error_message:"Book accepted formats: ( pdf ) Only!!",});
+             success_or_error_message:"Book accepted formats: ( pdf ) Only!!",
+            open:true});
 
         });
     }
     else{
-        alert(`${acceptedFiles[0].name}  uploaded successfully ✔️✔️ `);
+     
         setbookinfo((prevobj)=>{
 
             return ({...prevobj, 
@@ -176,7 +193,8 @@ const onDrop = useCallback(acceptedFiles => {
                
                 Is_success_or_error:"success",
   
-             success_or_error_message:`${acceptedFiles[0].name}  uploaded successfully ✔️✔️ `,});
+             success_or_error_message:`${acceptedFiles[0].name}  uploaded successfully ✔️✔️ `,
+            open:true});
 
         }); 
     }
@@ -196,9 +214,10 @@ const {
     accept: 'application/pdf'
 });
  function uploadform(event){
+  
         event.preventDefault();
         if(bookinfo.Is_pdf_uploaded===false){
-            alert(`❌ Upload 📚Book before Submitting ❌`);
+          
         setbookinfo((prevobj)=>{
 
             return ({...prevobj, 
@@ -206,7 +225,8 @@ const {
                
                 Is_success_or_error:"error",
   
-             success_or_error_message:`Upload 📚Book before Submitting `,});
+             success_or_error_message:`Upload 📚Book before Submitting `,
+            open:true});
 
         }); 
         }
@@ -237,7 +257,7 @@ const {
             .then(res => {
                 console.log(res.data);
                 if(res.data.message==="success"){
-                alert(`FormData submitted successfully ✔️✔️ `);
+              
         setbookinfo((prevobj)=>{
 
             return ({
@@ -254,11 +274,12 @@ const {
                 Rating:5,
                 Is_success_or_error:"success",
   
-             success_or_error_message:`FormData Submitted successfully ✔️✔️ `,});
+             success_or_error_message:`FormData Submitted successfully ✔️✔️ `,
+            open:true,});
 
         }); }
         else{
-            alert(` Error Submitting, Try Again 👩‍🔧👩‍🔧`);
+         
                 setbookinfo((prevobj)=>{
         
                     return ({...prevobj, 
@@ -266,14 +287,15 @@ const {
                        
                         Is_success_or_error:"error",
           
-                     success_or_error_message:`Error Submitting, Try Again 👩‍🔧👩‍🔧`,});
+                     success_or_error_message:`Error Submitting, Try Again 👩‍🔧👩‍🔧`,
+                    open:true,});
         
                 }); 
         }
 
             })
             .catch(err => {
-                alert(` Error Submitting, Try Again 👩‍🔧👩‍🔧`);
+              
                 setbookinfo((prevobj)=>{
         
                     return ({...prevobj, 
@@ -281,19 +303,39 @@ const {
                        
                         Is_success_or_error:"error",
           
-                     success_or_error_message:`Error Submitting, Try Again 👩‍🔧👩‍🔧`,});
+                     success_or_error_message:`Error Submitting, Try Again 👩‍🔧👩‍🔧`,
+                    open:true,});
         
                 }); 
             });
         }
        
     }
-            
+  function closemodal(event){
+      setbookinfo((prevobj)=>{
+          return ({...prevobj,open:false});
+      });
+  }        
 
   return ( < > 
 
+  {bookinfo.open?      
+<Modal
+        open={bookinfo.open}
         
-
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+           <span style={bookinfo.Is_success_or_error==="success"?{color:"green"}:{color:"red"}}><b>{bookinfo.Is_success_or_error.toUpperCase()}</b></span>
+          </Typography>
+          <Typography id="modal-modal-description" >
+            {bookinfo.success_or_error_message}<br/><br/>
+            <button type="button" className="ui blue button" onClick={closemodal} style={{position:"absolute",zIndex:"-1",right:"10px",bottom:"10px"}}>Ok</button>
+          </Typography>
+        </Box>
+      </Modal>:null}
 
 		<center>
 
