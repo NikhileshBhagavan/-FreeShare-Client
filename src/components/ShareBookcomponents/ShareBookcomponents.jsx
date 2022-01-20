@@ -35,7 +35,7 @@ function ShareBookContainer() {
         Book_pdf_file:null,
 
         Is_pdf_uploaded:false,
-        Rating:0,
+   
         Is_success_or_error:null,
      
         success_or_error_message:"",
@@ -195,7 +195,7 @@ const {
     onDrop,
     accept: 'application/pdf'
 });
-    function uploadform(event){
+ function uploadform(event){
         event.preventDefault();
         if(bookinfo.Is_pdf_uploaded===false){
             alert(`❌ Upload 📚Book before Submitting ❌`);
@@ -344,7 +344,7 @@ const {
 
             <Dropdown root={getRootProps} inp={getInputProps} dragactive={isDragActive} />
   
-            <UserRating obj={bookinfo} func={changerating} />
+        
      
             < /center>
             <br/>
@@ -363,5 +363,5 @@ const {
 
 </center>
     < / > );
-    }
-    export default ShareBookContainer;
+}
+export default ShareBookContainer;

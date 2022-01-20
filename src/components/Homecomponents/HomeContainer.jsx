@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {
     BrowserRouter as Router,
     Routes,
@@ -9,6 +9,7 @@ import { Button, Icon } from 'semantic-ui-react';
 
 
 function HomeContainer() {
+
 
     return (
 

@@ -7,7 +7,7 @@ function BookTitle(props) {
             <label > <b>Book Title<span style={{color:"red"}}>*</span></b> < /label > :&nbsp;
             <br/>
 
-            <input autoComplete="off" name="Book_title" style = { { width: "76%" ,marginTop:"10px"} } placeholder = "Book Title" type = "text" value={props.obj["Book_title"]} onChange={props.change} required = "required" / >
+            <input maxLength="100" autoComplete="off" name="Book_title" style = { { width: "76%" ,marginTop:"10px"} } placeholder = "Book Title" type = "text" value={props.obj["Book_title"]} onChange={props.change} required = "required" / >
             
         </div>);
 }

@@ -6,7 +6,7 @@ function Dropdown(props) {
     <div className = "ui basic "  style={{marginBottom:"13px"}}>
     <div className="ui segment" >
 
-        <div className = "header" style={{marginBottom:"10px",color:"darkblue",}} > 
+        <div className = "header" style={{marginBottom:"10px",color:"darkblue"}} > 
 
             <b>📚Upload Book📚 </b>
             
@@ -21,7 +21,7 @@ function Dropdown(props) {
 
             <input {...props.inp() }/>
 
-                <i className = "file pdf outline icon" style={{fontSize:"9rem"}}> < /i> 
+                <i className = "file pdf outline icon upic" > < /i> 
 
                 <br / >
 
