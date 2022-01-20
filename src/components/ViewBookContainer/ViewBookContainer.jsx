@@ -67,12 +67,12 @@ function ViewBookContainer(){
     else{
 
     setinfo((prevobj)=>{
-      let z=k.toLowerCase().replace(/\s|_|,|-|"|/g,'');
+      let z=k.toLowerCase().replace(/\s|_|,|-|"|'/g,'');
       console.log(z);
       const filteredData = prevobj.filterlist.filter(item => {
         let keys=["title","department","subdepartment"];
         return keys.some(key =>
-          item[key].toLowerCase().replace(/\s|_|,|-|"|/g,'').includes(z)
+          item[key].toLowerCase().replace(/\s|_|,|-|"|'/g,'').includes(z)
         );
       });
      return ({ ...prevobj,

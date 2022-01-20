@@ -16,7 +16,7 @@ const obj = {
         icon_url: "https://www.york.ac.uk/media/study/courses/undergraduate/economics/EconomicsFinanceHero.jpg",
     },
     "Children's": {
-        sublist: ["0-2 years", "3-5 years", "6-8 years", "9-12 years", "13-16 years"],
+        sublist: ["0-2 years", "3-5 years", "6-8 years", "9-12 years", "13-16 years", "Others"],
         icon_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvgfjwkJDh16qHGSBPPGM2xXig9nMVtajDQQ&usqp=CAU",
     },
     "Comics & Mangas": {
