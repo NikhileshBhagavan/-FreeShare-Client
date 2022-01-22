@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react';
-import { Dropdown, Dimmer, Loader, Image, Segment  } from 'semantic-ui-react';
+import React,{useState,useEffect,useRef} from 'react';
+import { Dropdown, Dimmer, Loader, Image, Segment ,Popup } from 'semantic-ui-react';
 import obj from "../data.jsx";
 
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -13,9 +13,38 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import axios from "axios";
+import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import ListItemText from '@mui/material/ListItemText';
+import ListItem from '@mui/material/ListItem';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+
+import SendIcon from '@mui/icons-material/Send';
+import CloseIcon from '@mui/icons-material/Close';
+import Slide from '@mui/material/Slide';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import EmailIcon from '@mui/icons-material/Email';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 
 function ViewBookContainer(){
+ const [report,setreport]=useState({
+   report_book_id:null,
+   report_book_name:null,
+   report_book_department:null,
+   report_book_sub_department:null,
+ });
+
+ const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
   
   let keys=Object.keys(obj);
   keys.pop();
@@ -48,6 +77,7 @@ function ViewBookContainer(){
     viewlist:null,
   });
   console.log(info);
+  console.log(report);
 
 
 
@@ -119,7 +149,115 @@ useEffect(()=>{
   });
 
 },[value]);
+const report_subject = useRef(null);//report_subject.current.childNodes[1].childNodes[0].value
+const report_message=useRef(null);//report_message.current.childNodes[1].childNodes[0].value)
+const report_email=useRef(null);//report_email.current.childNodes[0].childNodes[0].value)
+const report_otp=useRef(null);//report_otp.current.childNodes[0].childNodes[0].value
+function handleChange(e){
+alert("hi");
+}
   return (<>
+
+
+   <Dialog key={report.report_book_id===null? "#fffffff" :report.report_book_id}
+        fullScreen
+        open={report.report_book_id===null?false:true}
+  
+        TransitionComponent={Transition}
+      >
+        <AppBar sx={{ position: 'relative' }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={()=>{
+                setreport((prevobj)=>{
+                  return ({report_book_id:null,
+                      report_book_name:null,
+                      report_book_department:null,
+                      report_book_sub_department:null,
+                  
+             
+                  });
+                });}}
+              aria-label="close"
+            >
+              <CloseIcon 
+            />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Book Id : {report.report_book_id}
+            </Typography>
+            <Button autoFocus color="inherit" onClick={handleChange}>
+              Report
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <List>
+          <ListItem >
+            <ListItemText primary="Book Name" secondary={report.report_book_name} />
+            <ListItemText primary="Sub Department" secondary={report.report_book_sub_department}/>
+            <ListItemText primary="Department" secondary={report.report_book_department} />
+          </ListItem>
+          <Divider />
+          <ListItem >
+         
+               <TextField
+               ref={report_subject}
+              
+          sx={{ width: "98%" ,my:1,mb:0,mt:2}}
+          fullWidth
+          required
+          id="outlined-required"
+          label="Subject"
+          placeholder="Enter the Type of Report (Eg:Plagiarized, UnRelated) in less than 50 Characters"
+          inputProps={{ maxLength: 50 }}
+       
+        />
+        
+          </ListItem>
+          <ListItem>
+          <TextField
+          ref={report_message}
+           minRows={4}
+          sx={{width:"98%",mb:2}}
+          required
+          id="standard-textarea"
+          label="Reason"
+          placeholder=' Give Detailed Explanation of Why do you want to report this book?
+          Eg: 
+          This book is different from its Name 
+          This book is not Related to Mentioned Department
+          This book is Plagiarized.
+          
+          '
+          multiline
+          variant="standard"
+        />
+          </ListItem>
+
+ 
+          <Divider />
+          <ListItem >
+          <EmailIcon sx={{ color: 'action.active',mt:1 }} />
+         
+        <TextField ref={report_email} sx={{width:"85%",ml:1,mb:2,mt:2}} required id="input-with-sx"  placeholder="Enter Your Email for Confirmation" variant="standard" />
+        <Popup inverted content="Confirm Email" trigger={<Button variant="contained" sx={{ml:"2%"}}>
+      Send OTP 🔐
+      </Button>}/>
+          </ListItem>
+          <ListItem>
+          <VpnKeyIcon sx={{ color: 'action.active'}} />
+         
+         <TextField ref={report_otp} type="password" sx={{width:"96%",ml:1,mb:2}} required   placeholder="Enter OTP Sent To Above Mail Id" variant="standard" />
+          </ListItem>
+        </List>
+
+
+
+
+      
+      </Dialog>
   <div className="ui blue message" style={{margin:"0px",borderRadius:"0px",paddingTop:"21px"}}>
   <Autocomplete  
    value={info.department}
@@ -204,10 +342,11 @@ value={info.subdepartment}
       <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
     </Segment>:
    <div className="row" style={{margin:"0px"}}>
+   
    {info.viewlist.map((obj)=>{
      const a="http://localhost:8000"+obj.book_img_url;
      const b="http://localhost:8000"+obj.book_url
-     return (<div className="col-xl-3 col-lg-4 col-sm-6" style={{marginTop:"10px"}}>
+     return (<div key={obj.uuid} className="col-xl-3 col-lg-4 col-sm-6" style={{marginTop:"10px"}}>
 
 <Card sx={{minHeight:"100%",wordWrap:"break-word"}}>
    <CardMedia
@@ -229,12 +368,29 @@ value={info.subdepartment}
 
     
      </Typography>
-   </CardContent>
+   </CardContent> 
    <CardActions>
      <Button size="small"><a href={b} target="_blank">Download</a></Button>
-     <Button size="small">Report</Button>
+     <Button size="small" name={obj.uuid} onClick={(e)=>{
+       let k=e.target.name;
+        let obj=info.mainlist.filter((obj)=>{
+          return obj.uuid===k;
+        })
+        console.log(k);
+        console.log(obj);
+       setreport((prevobj)=>{
+         return ({...prevobj,report_book_id:k,
+        
+   report_book_name:obj[0].title,
+   report_book_department:obj[0].department,
+   report_book_sub_department:obj[0].subdepartment,
+   
+         });
+       })
+     }}>Report</Button>
    </CardActions>
  </Card>
+
 </div>);
    })}
 

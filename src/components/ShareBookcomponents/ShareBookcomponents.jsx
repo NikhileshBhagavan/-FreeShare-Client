@@ -18,7 +18,13 @@ import Modal from '@mui/material/Modal';
 import Dropdown from "./DropDown.jsx";
 import Submit from "./Submit.jsx";
 import ImageUpload from "./ImageUpload.jsx";
+import Slide from '@mui/material/Slide';
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 
@@ -315,27 +321,28 @@ const {
       setbookinfo((prevobj)=>{
           return ({...prevobj,open:false});
       });
-  }        
+  }  
 
   return ( < > 
 
   {bookinfo.open?      
-<Modal
+    <Dialog
         open={bookinfo.open}
-        
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-describedby="alert-dialog-slide-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+        
+        <DialogTitle>
            <span style={bookinfo.Is_success_or_error==="success"?{color:"green"}:{color:"red"}}><b>{bookinfo.Is_success_or_error.toUpperCase()}</b></span>
-          </Typography>
-          <Typography id="modal-modal-description" >
-            {bookinfo.success_or_error_message}<br/><br/>
-            <button type="button" className="ui blue button" onClick={closemodal} style={{position:"absolute",zIndex:"-1",right:"10px",bottom:"10px"}}>Ok</button>
-          </Typography>
-        </Box>
-      </Modal>:null}
+           </DialogTitle>
+           <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            <b>{bookinfo.success_or_error_message}</b>
+            </DialogContentText></DialogContent>
+            <DialogActions>
+            <button type="button" className="ui blue button" onClick={closemodal} >Ok {bookinfo.Is_success_or_error==="success"?<span>🙂</span>:<span>😢</span>}</button>
+            </DialogActions>
+   
+      </Dialog>:null}
 
 		<center>
 
