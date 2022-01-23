@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react';
-import { Dropdown, Dimmer, Loader, Image, Segment ,Popup } from 'semantic-ui-react';
+import { Dropdown, Dimmer, Loader, Image, Segment ,Popup,Accordion, Icon  } from 'semantic-ui-react';
 import obj from "../data.jsx";
 
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -35,6 +35,7 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
 
 function ViewBookContainer(){
+ const [activeindex,setactiveindex]=useState(null);
  const [report,setreport]=useState({
    report_book_id:null,
    report_book_name:null,
@@ -113,7 +114,7 @@ function ViewBookContainer(){
     });}
   }
 useEffect(()=>{
-  alert("hi");
+ 
   axios.get('http://localhost:8000/books')
   .then(function (response) {
     if(response.data.message==="Success"){
@@ -272,6 +273,7 @@ function sendmail(e){
           </Toolbar>
         </AppBar>
         <List>
+      
           <ListItem >
             <ListItemText primary="Book Name" secondary={report.report_book_name} />
             <ListItemText primary="Sub Department" secondary={report.report_book_sub_department}/>
@@ -287,7 +289,7 @@ function sendmail(e){
           fullWidth
           required
           id="outlined-required"
-          label="Subject"
+          label="Subject of the Report"
           placeholder="Enter the Type of Report (Eg:Plagiarized, UnRelated) in less than 50 Characters"
           inputProps={{ maxLength: 50 }}
        
@@ -301,7 +303,7 @@ function sendmail(e){
           sx={{width:"98%",mb:2}}
           required
           id="standard-textarea"
-          label="Reason"
+          label="Reason of the Report"
           placeholder=' Give Detailed Explanation of Why do you want to report this book?
           Eg: 
           This book is different from its Name 
@@ -310,7 +312,7 @@ function sendmail(e){
           
           '
           multiline
-          variant="standard"
+        
         />
           </ListItem>
 
@@ -337,6 +339,24 @@ function sendmail(e){
       
       </Dialog>
   <div className="ui blue message" style={{margin:"0px",borderRadius:"0px",paddingTop:"21px"}}>
+  
+  <Accordion fluid styled>
+        <Accordion.Title
+          active={activeindex === 0}
+          index={0}
+          onClick={(e)=>{
+            setactiveindex((prevvalue)=>{
+              return prevvalue===null ?0:null;
+            });
+          }}
+        >
+          <Icon name='dropdown' />
+          Filters
+        </Accordion.Title>
+        <Accordion.Content active={activeindex === 0}>
+         
+        
+  
   <Autocomplete  
    value={info.department}
         onChange={(event, newValue) => {
@@ -407,6 +427,8 @@ value={info.subdepartment}
  sx={{ width: "100%" }}
  renderInput={(params) => <TextField {...params} label="Sub Department" fullWidth/>}
 />
+</Accordion.Content>
+</Accordion>
   </div>
   <div className="ui red message" style={{margin:"0px",borderRadius:"0px",paddingRight:"5px"}}>
   <input type="text" value={info.searchvalue} onChange={change} className="form-control adjust" style={{display:"inline-block"}} placeholder="Search by any keyword" /> <button className="btn btn-primary" style={{position:"relative",right:"10px",bottom:"2px",height:"51px"}}><i className="search icon"></i></button> 
