@@ -40,6 +40,7 @@ function ViewBookContainer(){
    report_book_name:null,
    report_book_department:null,
    report_book_sub_department:null,
+
  });
 
  const Transition = React.forwardRef(function Transition(props, ref) {
@@ -153,10 +154,86 @@ const report_subject = useRef(null);//report_subject.current.childNodes[1].child
 const report_message=useRef(null);//report_message.current.childNodes[1].childNodes[0].value)
 const report_email=useRef(null);//report_email.current.childNodes[0].childNodes[0].value)
 const report_otp=useRef(null);//report_otp.current.childNodes[0].childNodes[0].value
-function handleChange(e){
-alert("hi");
+function ValidateEmail(mail) 
+{
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+  {
+    return (true);
+  }
+
+    return (false);
+}
+function handleSubmit(e){
+  let a=report_subject.current.childNodes[1].childNodes[0].value;
+  let b=report_message.current.childNodes[1].childNodes[0].value;
+  let c=report_email.current.childNodes[0].childNodes[0].value;
+  let d=report_otp.current.childNodes[0].childNodes[0].value;
+  if(a===""){
+    alert("Subject Of Report Must Be Mentioned Before Submitting Report...");
+    return;
+  }
+  if(b===""){
+    alert("Reason For Reporting Must Be Mentioned Before Submitting Report...");
+    return;
+  }
+  if(ValidateEmail(c)===false){
+    alert("Invalid Email Format...");
+    return;
+  }
+  if(d.length!==6){
+    alert("Invalid OTP...");
+    return ;
+  }
+  axios.post('http://localhost:8000/report', {
+    report_book_id:report.report_book_id,
+    report_subject:a,
+    report_message:b,
+    report_email:c,
+    report_otp:d
+   })
+   .then(function (response) {
+     if(response.data.message==="success"){
+       alert(`Your Report for Book named: ${report.report_book_name} have been Noted . Report Update will be Sent to Your Mail Shortly 🙂`);
+       setreport((prevobj)=>{
+         return ({
+        report_book_id:null,
+        report_book_name:null,
+        report_book_department:null,
+        report_book_sub_department:null,
+        
+       });
+     });}
+     else{
+       alert(response.data.message);
+     }
+   })
+   .catch(function (error) {
+     alert("Error, Try Submitting Again");
+   });
+
+}
+
+function sendmail(e){
+  let mail=report_email.current.childNodes[0].childNodes[0].value
+  if(ValidateEmail(report_email.current.childNodes[0].childNodes[0].value)===true){
+    axios.post('http://localhost:8000/initialreport', {
+     email:mail,
+     book_uuid:report.report_book_id
+    })
+    .then(function (response) {
+      alert(response.data.message);
+    })
+    .catch(function (error) {
+      alert("Error, Click Send OTP again");
+    });
+  }
+  else{
+    alert("Invalid Email");
+  }
+
 }
   return (<>
+  
 
 
    <Dialog key={report.report_book_id===null? "#fffffff" :report.report_book_id}
@@ -176,6 +253,7 @@ alert("hi");
                       report_book_name:null,
                       report_book_department:null,
                       report_book_sub_department:null,
+                    
                   
              
                   });
@@ -188,7 +266,7 @@ alert("hi");
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               Book Id : {report.report_book_id}
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleChange}>
+            <Button autoFocus color="inherit" onClick={handleSubmit}>
               Report
             </Button>
           </Toolbar>
@@ -219,7 +297,7 @@ alert("hi");
           <ListItem>
           <TextField
           ref={report_message}
-           minRows={4}
+           minRows={6}
           sx={{width:"98%",mb:2}}
           required
           id="standard-textarea"
@@ -242,7 +320,7 @@ alert("hi");
           <EmailIcon sx={{ color: 'action.active',mt:1 }} />
          
         <TextField ref={report_email} sx={{width:"85%",ml:1,mb:2,mt:2}} required id="input-with-sx"  placeholder="Enter Your Email for Confirmation" variant="standard" />
-        <Popup inverted content="Confirm Email" trigger={<Button variant="contained" sx={{ml:"2%"}}>
+        <Popup inverted content="Confirm Email" trigger={<Button onClick={sendmail} variant="contained" sx={{ml:"2%"}}>
       Send OTP 🔐
       </Button>}/>
           </ListItem>
