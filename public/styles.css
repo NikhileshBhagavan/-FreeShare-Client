@@ -9,10 +9,6 @@ body {
     min-height: 100vh;
 }
 
-#root {
-    height: 100%;
-}
-
 .home {
     margin-top: 60px;
     background-image: url("./finalbgimage.jpg");
@@ -132,14 +128,7 @@ li {
 }
 
 .sharebook {
-    position: relative;
-    min-height: 100%;
-}
-
-form {
-    margin: 0;
-    position: absolute;
-    top: 14%;
+    margin-top: 80px;
 }
 
 
@@ -325,6 +314,10 @@ input[type=checkbox] {
     }
     .icon.upic {
         font-size: 15rem;
+    }
+    form {
+        position: absolute;
+        top: 14%;
     }
 }
 
