@@ -32,6 +32,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import EmailIcon from '@mui/icons-material/Email';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { styled } from '@mui/material/styles';
 
 
 function ViewBookContainer(){
@@ -170,11 +171,11 @@ function handleSubmit(e){
   let c=report_email.current.childNodes[0].childNodes[0].value;
   let d=report_otp.current.childNodes[0].childNodes[0].value;
   if(a===""){
-    alert("Subject Of Report Must Be Mentioned Before Submitting Report...");
+    alert("Subject Of the Report Must Be Mentioned Before Submitting Report...");
     return;
   }
   if(b===""){
-    alert("Reason For Reporting Must Be Mentioned Before Submitting Report...");
+    alert("Reason of the Report Must Be Mentioned Before Submitting Report...");
     return;
   }
   if(ValidateEmail(c)===false){
@@ -229,10 +230,15 @@ function sendmail(e){
     });
   }
   else{
-    alert("Invalid Email");
+    alert("Invalid Email...");
   }
 
 }
+const Div = styled('div')(({ theme }) => ({
+  ...theme.typography.button,
+  backgroundColor: theme.palette.background.paper,
+  padding: theme.spacing(1),
+}));
   return (<>
   
 
@@ -273,7 +279,7 @@ function sendmail(e){
           </Toolbar>
         </AppBar>
         <List>
-      
+
           <ListItem >
             <ListItemText primary="Book Name" secondary={report.report_book_name} />
             <ListItemText primary="Sub Department" secondary={report.report_book_sub_department===""?report.report_book_department:report.report_book_sub_department}/>
@@ -290,7 +296,7 @@ function sendmail(e){
           required
           id="outlined-required"
           label="Subject of the Report"
-          placeholder="Enter the Type of Report (Eg:Plagiarized, UnRelated) in less than 50 Characters"
+          placeholder="Enter the Subject of the Report (Eg:Plagiarized, UnUsual Content , UnRelated Content) in less than 50 Characters"
           inputProps={{ maxLength: 50 }}
        
         />
@@ -306,7 +312,7 @@ function sendmail(e){
           label="Reason of the Report"
           placeholder=' Give Detailed Explanation of Why do you want to report this book?
           Eg: 
-          This book is different from its Name 
+          This book is different from its Title
           This book is not Related to Mentioned Department
           This book is Plagiarized.
           
@@ -338,9 +344,9 @@ function sendmail(e){
 
       
       </Dialog>
-  <div className="ui message" style={{margin:"0px",borderRadius:"0px",padding:"21px",marginBottom:"10px"}}>
+  <div className="ui message" style={{minHeight:"100vh",margin:"0px",borderRadius:"0px",padding:"21px"}}>
   
-  <Accordion fluid styled>
+  <Accordion fluid styled style={{width:"calc(100% - 21px)",marginLeft:"10.5px",marginBottom:"15px"}}>
         <Accordion.Title
           active={activeindex === 0}
           index={0}
@@ -429,11 +435,11 @@ value={info.subdepartment}
 />
 </Accordion.Content>
 </Accordion>
-  </div>
+ 
 
   
 
-  <div className="ui message" style={{margin:"0px",borderRadius:"0px",paddingLeft:"10.5px",paddingRight:"10.5px"}}>
+  
   <input type="text" value={info.searchvalue} onChange={change} className="form-control adjust" style={{display:"inline-block",paddingLeft:"5px",paddingRight:"5px"}} placeholder="Search by any keyword" /> <button className="btn btn-primary" style={{position:"relative",right:"10px",bottom:"2px",height:"51px"}}><i className="search icon"></i></button> 
    {info.isloaded===false ?  <Segment >
       <Dimmer active inverted>

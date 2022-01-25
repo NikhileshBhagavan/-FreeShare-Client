@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import {
     BrowserRouter as Router,
     Routes,
@@ -13,9 +13,14 @@ function HomeContainer() {
 
     return (
 
-         < div style = {  { height: "100%", position: "relative" }} > 
+        <
+        div style = {
+            { height: "100%", position: "relative" }
+        } >
 
-         < div style = {
+
+        <
+        div style = {
             {
                 color: "white",
                 margin: "0",
@@ -27,53 +32,84 @@ function HomeContainer() {
             }
         } >
 
-            < h1 > Holla!! < /h1> 
+        <
+        h1 > Holla!! < /h1> 
 
-            <h3 > FreeShare is a E - Book📚 Sharing Platform < /h3> 
+        <
+        h3 > <a href="/" style={{color:"#4183c4"}}>FreeShare</a> &nbsp;is a E - Book📚 Sharing Platform < /h3> 
 
-            <br/ >
+        <
+        br / >
 
 
-            <Link to = "/viewbook" >
+        <
+        Link to = "/viewbook" >
 
-                <Button animated style = {{ width: "300px" }} >
+        <
+        Button animated style = {
+            { width: "300px" }
+        } >
 
-                    < Button.Content visible > < Icon className = ' download' / > < /Button.Content>
+        <
+        Button.Content visible > < Icon className = ' download' / > < /Button.Content>
 
-                    <Button.Content hidden >
+        <
+        Button.Content hidden >
 
-                        View And Download Books
+        View And Download Books
 
-                    </Button.Content>
+        <
+        /Button.Content>
 
-                < / Button >
+        <
+        / Button >
 
-            </Link > 
+        <
+        /Link > 
 
-            < br / >
+        <
+        br / >
 
-            < br / >
+        <
+        br / >
 
-            < Link to = "/sharebook" >
+        <
+        Link to = "/sharebook" >
 
-                <Button animated = "vertical" style = {{ width: "300px" }} >
+        <
+        Button animated = "vertical"
+        style = {
+            { width: "300px" }
+        } >
 
-                    <Button.Content visible > < Icon className = ' share' / > < /Button.Content>
+        <
+        Button.Content visible > < Icon className = ' share' / > < /Button.Content>
 
-                    <Button.Content hidden >
+        <
+        Button.Content hidden >
 
-                        Share Books
+        Share Books
 
-                    </Button.Content> 
+        <
+        /Button.Content> 
 
-                < /Button >
+        <
+        /Button >
 
-            < /Link >
+        <
+        /Link > <
+        br / > < br / > <
+        a href = "/admin"
+        style = {
+            { fontSize: "1.1rem", color: "white", }
+        } > Are u an admin ?  &nbsp; < span style = {
+            { color: "#4183c4" }
+        } > < b > Click here < /b>< /span > < /a > < /
+        div >
 
-        < /div > 
+        <
+        /div >
 
-    < /div >
-
-            );
-    }
+    );
+}
 export default HomeContainer;

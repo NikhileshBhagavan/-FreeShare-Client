@@ -59,10 +59,7 @@ function Navbar() {
         <
         /ul> </li > < Link to = "/contact" > <
         li > Contact < /li >< /Link >
-        <
-        a href = "/admin
-        "> <
-        li > Admin < /li></a >
+
 
 
         <
