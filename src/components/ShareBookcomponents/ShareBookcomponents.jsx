@@ -376,7 +376,9 @@ const {
             
 
             <br/>
+          
             <ImageUpload func={upload} />
+         
            
            
 
@@ -391,9 +393,11 @@ const {
                 <div className = "col-lg-6"  >
 
             < center >
-
+   <div className = "ui basic "  style={{marginBottom:"13px"}}>
+   <div className="ui segment" style={bookinfo["Is_Book_Department_Others"] ?{paddingTop:"31px",paddingBottom:"31px"}:bookinfo["Is_SubBook_Department_Others"] ?{paddingTop:"35px",paddingBottom:"35px"}:null}>
             <Dropdown root={getRootProps} inp={getInputProps} dragactive={isDragActive} />
-  
+            </div>
+  </div>
         
      
             < /center>
@@ -402,8 +406,8 @@ const {
 
                 </div >
 
-               < /div>
-
+             
+</div>
          
 
             <Submit />

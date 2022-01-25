@@ -338,7 +338,7 @@ function sendmail(e){
 
       
       </Dialog>
-  <div className="ui segment" style={{margin:"0px",borderRadius:"0px",paddingTop:"21px"}}>
+  <div className="ui message" style={{margin:"0px",borderRadius:"0px",padding:"21px",marginBottom:"10px"}}>
   
   <Accordion fluid styled>
         <Accordion.Title
@@ -430,10 +430,11 @@ value={info.subdepartment}
 </Accordion.Content>
 </Accordion>
   </div>
-  <div className="ui segment" style={{margin:"0px",borderRadius:"0px",paddingRight:"5px"}}>
-  <input type="text" value={info.searchvalue} onChange={change} className="form-control adjust" style={{display:"inline-block"}} placeholder="Search by any keyword" /> <button className="btn btn-primary" style={{position:"relative",right:"10px",bottom:"2px",height:"51px"}}><i className="search icon"></i></button> 
-  </div>
-  <div className="ui segment" style={{margin:"0px",borderRadius:"0px",paddingLeft:"10.5px",paddingRight:"10.5px"}}>
+
+  
+
+  <div className="ui message" style={{margin:"0px",borderRadius:"0px",paddingLeft:"10.5px",paddingRight:"10.5px"}}>
+  <input type="text" value={info.searchvalue} onChange={change} className="form-control adjust" style={{display:"inline-block",paddingLeft:"5px",paddingRight:"5px"}} placeholder="Search by any keyword" /> <button className="btn btn-primary" style={{position:"relative",right:"10px",bottom:"2px",height:"51px"}}><i className="search icon"></i></button> 
    {info.isloaded===false ?  <Segment >
       <Dimmer active inverted>
         <Loader size='large'>Loading</Loader>
@@ -442,11 +443,20 @@ value={info.subdepartment}
       <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
     </Segment>:
    <div className="row" style={{margin:"0px"}}>
+   {info.viewlist.length===0?<>  <center><img className="nothing"  src="https://in.bmscdn.com/discovery-catalog/lib/tr:w-600/no-entertainement-in-area-202007011731.png"/>
+ 
+   <div className="ui message " style={{border:"0px",margin:"0px",padding:"10px"}}>
+     <b>Nope! &nbsp;Nothing!&nbsp; Nada!</b><br/>
+     <div>Sorry! We haven't found anything related to your search</div>
+
+   </div>
+   </center>
+   </>:null}
    
    {info.viewlist.map((obj)=>{
      const a="http://localhost:8000"+obj.book_img_url;
      const b="http://localhost:8000"+obj.book_url
-     return (<div key={obj.uuid} className="col-xl-3 col-lg-4 col-sm-6" style={{marginTop:"10px"}}>
+     return (<div key={obj.uuid} className="col-xl-3 col-lg-4 col-sm-6" style={{marginTop:"15px"}}>
 
 <Card sx={{minHeight:"100%",wordWrap:"break-word"}}>
    <CardMedia

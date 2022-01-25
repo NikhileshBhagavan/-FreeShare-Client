@@ -3,8 +3,8 @@ import React from "react";
 function Dropdown(props) {
     return ( < >
     
-    <div className = "ui basic "  style={{marginBottom:"13px"}}>
-    <div className="ui segment" >
+ 
+
 
         <div className = "header" style={{marginBottom:"10px",color:"darkblue"}} > 
 
@@ -35,8 +35,8 @@ function Dropdown(props) {
 
         </div>
 
-    < /div > 
-    </div>
+
+
 
 < / > );
 

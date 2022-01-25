@@ -230,10 +230,17 @@ input[type=checkbox] {
     margin-right: 0px;
 }
 
+.nothing {
+    margin-top: 30px;
+    width: 50%;
+    height: auto;
+}
+
 .adjust {
-    width: calc(100% - 50px);
+    width: calc(100% - 58px);
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-left: 10.5px;
 }
 
 .book {
@@ -370,5 +377,17 @@ form {
 @media (max-width:992px) {
     form {
         padding-top: 30px;
+    }
+}
+
+@media (max-width:600px) {
+    .nothing {
+        width: 75%;
+    }
+}
+
+@media (max-width:400px) {
+    .nothing {
+        width: 100%;
     }
 }
