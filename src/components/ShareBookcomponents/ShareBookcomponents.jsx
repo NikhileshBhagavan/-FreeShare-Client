@@ -100,7 +100,7 @@ function ShareBookContainer() {
                 return ({
                     ...prevobj,
                     Book_Department:text,
-                    Book_SubDepartment:obj[text][0],
+                    Book_SubDepartment:obj[text].sublist[0],
                     Is_Book_Department_Others:false,
                     Is_SubBook_Department_Others:false,
  
@@ -347,6 +347,7 @@ const {
 		<center>
 
         <form onSubmit={uploadform} encType="multipart/form-data" style={{width:"100%"}}>
+        <br/>
         <FormMessage obj={bookinfo} cancel={closemessagebutton} />
       
 
@@ -355,7 +356,7 @@ const {
       
             
                 <div className = "col-lg-6" >
-                <div className="ui segment" style={{marginBottom:"20px",padding:"10px"}}>
+                <div className="ui segment" style={{marginBottom:"20px",padding:"10.75px"}}>
 
             < center >
 
@@ -364,7 +365,7 @@ const {
             <br/>
 
             <Genre obj={bookinfo}  list={objkeys} change={changegenre} />
-            {bookinfo["Is_Book_Department_Others"] ?  <Topic obj={bookinfo} change={changecontent} /> :
+            {bookinfo["Is_Book_Department_Others"] ?  <><Topic obj={bookinfo} change={changecontent} /><br/><center> < label > < span > <b> Sub Department </b>: < /span>< /label ><SubTopic obj={bookinfo} change={changecontent}/></center> </> :
             <><SubGenre obj={bookinfo} list={obj[bookinfo.Book_Department].sublist} change={changesubgenre} />
       {bookinfo["Is_SubBook_Department_Others"] ? <SubTopic obj={bookinfo} change={changecontent}/>  : null}
       </>

@@ -276,7 +276,7 @@ function sendmail(e){
       
           <ListItem >
             <ListItemText primary="Book Name" secondary={report.report_book_name} />
-            <ListItemText primary="Sub Department" secondary={report.report_book_sub_department}/>
+            <ListItemText primary="Sub Department" secondary={report.report_book_sub_department===""?report.report_book_department:report.report_book_sub_department}/>
             <ListItemText primary="Department" secondary={report.report_book_department} />
           </ListItem>
           <Divider />
@@ -338,7 +338,7 @@ function sendmail(e){
 
       
       </Dialog>
-  <div className="ui blue message" style={{margin:"0px",borderRadius:"0px",paddingTop:"21px"}}>
+  <div className="ui segment" style={{margin:"0px",borderRadius:"0px",paddingTop:"21px"}}>
   
   <Accordion fluid styled>
         <Accordion.Title
@@ -351,7 +351,7 @@ function sendmail(e){
           }}
         >
           <Icon name='dropdown' />
-          Filters
+          <b>Filters</b>
         </Accordion.Title>
         <Accordion.Content active={activeindex === 0}>
          
@@ -430,10 +430,10 @@ value={info.subdepartment}
 </Accordion.Content>
 </Accordion>
   </div>
-  <div className="ui red message" style={{margin:"0px",borderRadius:"0px",paddingRight:"5px"}}>
+  <div className="ui segment" style={{margin:"0px",borderRadius:"0px",paddingRight:"5px"}}>
   <input type="text" value={info.searchvalue} onChange={change} className="form-control adjust" style={{display:"inline-block"}} placeholder="Search by any keyword" /> <button className="btn btn-primary" style={{position:"relative",right:"10px",bottom:"2px",height:"51px"}}><i className="search icon"></i></button> 
   </div>
-  <div className="ui red message" style={{margin:"0px",borderRadius:"0px",paddingLeft:"10.5px",paddingRight:"10.5px"}}>
+  <div className="ui segment" style={{margin:"0px",borderRadius:"0px",paddingLeft:"10.5px",paddingRight:"10.5px"}}>
    {info.isloaded===false ?  <Segment >
       <Dimmer active inverted>
         <Loader size='large'>Loading</Loader>
@@ -462,7 +462,7 @@ value={info.subdepartment}
      
      </Typography>
      <Typography variant="body2" color="text.secondary">
-     {obj.subdepartment}<br/>
+     {obj.subdepartment===""? obj.department: obj.subdepartment}<br/>
      {obj.department}
      
 

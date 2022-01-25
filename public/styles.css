@@ -38,6 +38,7 @@ li {
 .contact {
     position: relative;
     height: 100vh;
+    background-color: white;
     text-align: center;
 }
 
@@ -128,7 +129,9 @@ li {
 }
 
 .sharebook {
-    margin-top: 80px;
+    min-height: 100vh;
+    background-color: white;
+    margin-top: 60px;
 }
 
 
@@ -241,6 +244,10 @@ input[type=checkbox] {
     padding: 0px;
 }
 
+form {
+    background-color: white;
+}
+
 
 /* APPLYING MEDIA QUERIES */
 
@@ -328,7 +335,7 @@ input[type=checkbox] {
     }
     form {
         position: absolute;
-        top: 20%;
+        top: 18%;
     }
 }
 
@@ -357,5 +364,11 @@ input[type=checkbox] {
 @media (min-width:992px) and (max-width:1235px) {
     .field.imageupload {
         margin-top: 39px;
+    }
+}
+
+@media (max-width:992px) {
+    form {
+        padding-top: 30px;
     }
 }

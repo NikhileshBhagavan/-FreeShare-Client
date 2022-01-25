@@ -4,8 +4,9 @@ function ViewBook() {
 
     return <div className = "viewbook " style={{minHeight:"100vh",backgroundColor:" #fff",
  }}> 
- 
+  <div className="ui message" style={{minHeight:"100vh"}}>
      < ViewBookContainer / > 
+     </div>
        </div> ;
 }
 export default ViewBook;
